@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff1744 0%, #ff69b4 50%, #ff1744 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Corazones animados de fondo */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .container.yes-page {
+            animation: pulse 0.5s ease-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: #ff1744;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(255, 23, 68, 0.2);
+        }
+
+        .yes-message {
+            color: #ff1744;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            animation: heartBeat 0.8s ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.15);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #btn-si {
+            background: linear-gradient(135deg, #ff1744, #ff69b4);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 23, 68, 0.4);
+        }
+
+        #btn-si:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 23, 68, 0.6);
+        }
+
+        #btn-si:active {
+            transform: scale(0.98);
+        }
+
+        #btn-no {
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            color: #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid #ddd;
+        }
+
+        #btn-no:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        #btn-no:active {
+            transform: scale(0.98);
+        }
+
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .deco {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .deco:nth-child(1) {
+            top: 10px;
+            left: 10px;
+            animation-delay: 0s;
+        }
+
+        .deco:nth-child(2) {
+            top: 10px;
+            right: 10px;
+            animation-delay: 2s;
+        }
+
+        .deco:nth-child(3) {
+            bottom: 10px;
+            right: 10px;
+            animation-delay: 4s;
+        }
+
+        .deco:nth-child(4) {
+            bottom: 10px;
+            left: 10px;
+            animation-delay: 6s;
+        }
+
+        .text-decoration {
+            color: #ff1744;
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+
+        .from-text {
+            color: #ff1744;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .funny-message {
+            color: #ff1744;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            min-height: 40px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fondo con corazones animados -->
+    <div class="heart-bg" id="heartBg"></div>
+
+    <!-- Contenedor principal -->
+    <div class="container" id="container">
+        <div class="decorations">
+            <div class="deco">❤️</div>
+            <div class="deco">💕</div>
+            <div class="deco">💖</div>
+            <div class="deco">💗</div>
+        </div>
+
+        <h1 id="title">Hey Karen 👋</h1>
+
+        <div id="subtitle" class="subtitle">Sebastian tiene una pregunta para ti 💓</div>
+
+        <div id="from-text" class="from-text">¿Quieres ser mi San Valentín? (el no, nunca será opción) 😘</div>
+
+        <div id="text-decoration" class="text-decoration">💕 💕 💕</div>
+
+        <div id="funny-message" class="funny-message"></div>
+
+        <img id="minions-gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW1qMzUwdmJ4OGRtMzBwdHNmMnRjMzU1aGE3NHo5NWJ4dmJ0byZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Minions celebrando" style="display: none; width: 300px; margin: 30px auto; border-radius: 20px;">
+
+        <div class="buttons-container" id="buttons-container">
+            <button id="btn-si">Sí</button>
+            <button id="btn-no">No</button>
+        </div>
+    </img>
+
+    <script>
+        let noClickCount = 0;
+        let siButtonSize = 1;
+        const maxNoClicks = 4;
+        let buttonsSwapped = false;
+
+        const container = document.getElementById('container');
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const title = document.getElementById('title');
+        const buttonsContainer = document.getElementById('buttons-container');
+        const heartBg = document.getElementById('heartBg');
+
+        const funnyMessages = [
+            "😂 Eso fue un no muy dudoso...",
+            "🤔 Hmm, déjame ayudarte con eso...",
+            "😏 Seguro que lo dijiste bien?",
+            "👀 Me parece que tu dedo falla...",
+            "🚀 ¡El sí se hace más grande! ¡Mira! 👆",
+            "😱 ¡Casi me das un infarto!",
+            "💔 Eso duele... pero sigo aquí",
+            "🧔 Creo que quisiste apretar el otro botón",
+            "😤 Intenta de nuevo, porfa",
+            "🤷 Ni idea de por qué hiciste eso"
+        ];
+
+        // Generar corazones en el fondo
+        function generateHearts() {
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = ['❤️', '💕', '💖', '💗'][Math.floor(Math.random() * 4)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 6) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartBg.appendChild(heart);
+            }
+        }
+
+        // Click en botón "No"
+        btnNo.addEventListener('click', function() {
+            noClickCount++;
+
+            // Mostrar mensaje chistoso
+            const funnyMessage = document.getElementById('funny-message');
+            const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
+            funnyMessage.innerHTML = funnyMessages[messageIndex];
+
+            // Aumentar tamaño del botón "Sí"
+            siButtonSize += 0.15;
+            btnSi.style.transform = `scale(${siButtonSize})`;
+
+            // Después de 4 clicks en "No", intercambiar posiciones
+            if (noClickCount > maxNoClicks && !buttonsSwapped) {
+                buttonsSwapped = true;
+                btnSi.parentNode.insertBefore(btnNo, btnSi);
+            }
+        });
+
+        // Click en botón "Sí"
+        btnSi.addEventListener('click', function() {
+            // Mostrar GIF de minions
+            const minionsGif = document.getElementById('minions-gif');
+            minionsGif.style.display = 'block';
+
+            // Ocultar elementos
+            document.getElementById('subtitle').style.display = 'none';
+            document.getElementById('from-text').style.display = 'none';
+            document.getElementById('text-decoration').style.display = 'none';
+            document.getElementById('funny-message').style.display = 'none';
+
+            // Actualizar contenido
+            container.classList.add('yes-page');
+            title.innerHTML = '¡SÍ! Sabía que querías 💕';
+            buttonsContainer.style.display = 'none';
+
+            // Añadir más decoración
+            const decorContainer = document.querySelector('.decorations');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'deco';
+                heart.innerHTML = ['❤️', '💕', '💖', '💗', '🌹', '💑'][Math.floor(Math.random() * 6)];
+                heart.style.top = Math.random() * 80 + '%';
+                heart.style.left = Math.random() * 80 + '%';
+                decorContainer.appendChild(heart);
+            }
+
+            // Crear efecto de confeti de corazones
+            createConfetti();
+        });
+
+        // Efecto de confeti de corazones
+        function createConfetti() {
+            const symbols = ['❤️', '💕', '💖', '💗', '🌹', '✨'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-50px';
+                confetti.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                confetti.style.zIndex = '999';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.opacity = '1';
+                document.body.appendChild(confetti);
+
+                let top = -50;
+                let left = parseFloat(confetti.style.left);
+                const speed = Math.random() * 3 + 2;
+                const drift = Math.random() * 2 - 1;
+
+                const fall = setInterval(() => {
+                    top += speed;
+                    left += drift;
+                    confetti.style.top = top + 'px';
+                    confetti.style.left = left + 'px';
+                    confetti.style.opacity = 1 - (top / window.innerHeight);
+
+                    if (top > window.innerHeight) {
+                        clearInterval(fall);
+                        confetti.remove();
+                    }
+                }, 20);
+            }
+        }
+
+        // Inicializar
+        generateHearts();
+    </script>
+</body>
+</html>
